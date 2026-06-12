@@ -1,5 +1,5 @@
 // Lightweight API client. Works in both server and client components.
-const BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+const BASE = process.env.NEXT_PUBLIC_API_URL || 'https://server.globalcabs.adsdigitalmedia.com';
 export const API_BASE = BASE;
 
 const getToken = () => {

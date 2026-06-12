@@ -26,7 +26,7 @@ NODE_ENV=development
 MONGO_URI=mongodb://127.0.0.1:27017/globalcabs
 JWT_SECRET=change-this-to-a-long-random-string
 JWT_EXPIRES_IN=30d
-CLIENT_URL=http://localhost:3000
+CLIENT_URL=https://globalcabs.adsdigitalmedia.com
 
 # Cloudinary (image uploads)
 CLOUDINARY_CLOUD_NAME=xxxx
@@ -68,7 +68,7 @@ npm run dev      # nodemon
 npm start        # production
 ```
 
-Health check: `GET http://localhost:5000/api/health`
+Health check: `GET https://server.globalcabs.adsdigitalmedia.com/api/health`
 
 **Default admin:** `admin@theglobalcabs.com` / `admin123` — **change the password immediately in production** (Admin → Users, or via dashboard profile).
 
@@ -85,14 +85,14 @@ cp .env.local.example .env.local
 `.env.local`:
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:5000
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=https://server.globalcabs.adsdigitalmedia.com
+NEXT_PUBLIC_SITE_URL=https://globalcabs.adsdigitalmedia.com
 ```
 
 Run:
 
 ```bash
-npm run dev      # http://localhost:3000
+npm run dev      # https://globalcabs.adsdigitalmedia.com
 ```
 
 Production build:

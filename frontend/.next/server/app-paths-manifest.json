@@ -1,10 +1,1 @@
-{
-  "/fleet/[slug]/page": "app/fleet/[slug]/page.js",
-  "/page": "app/page.js",
-  "/[page]/page": "app/[page]/page.js",
-  "/login/page": "app/login/page.js",
-  "/admin/routes/page": "app/admin/routes/page.js",
-  "/dashboard/page": "app/dashboard/page.js",
-  "/admin/drivers/page": "app/admin/drivers/page.js",
-  "/admin/bookings/page": "app/admin/bookings/page.js"
-}
+{}

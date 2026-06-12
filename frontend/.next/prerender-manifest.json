@@ -1,1 +1,11 @@
-{"version":4,"routes":{"/privacy-policy":{},"/terms-and-conditions":{},"/cancellation-policy":{},"/services/local-taxi":{},"/services/outstation-taxi":{},"/services/airport-transfer":{},"/services/one-way-taxi":{},"/services/round-trip-taxi":{},"/services/corporate-cab-services":{}},"dynamicRoutes":{"/[page]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/[page]","routeRegex":"^\\/([^/]+?)(?:\\/)?$","allowHeader":[]},"/services/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/services/[slug]","routeRegex":"^\\/services\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"e4ea970995ea7c7d149d2c29b0fad726","previewModeSigningKey":"1c2335997d396732f93beea51a8d767101e726fb885bd1495a7a863f7cd63d9c","previewModeEncryptionKey":"3717fbc3afddfcae46267217b75c9dce446263984cce978d09021f15693539e4"}}
+{
+  "version": 4,
+  "routes": {},
+  "dynamicRoutes": {},
+  "notFoundRoutes": [],
+  "preview": {
+    "previewModeId": "617e79eefd83f6dbabd87e5df571cbdf",
+    "previewModeSigningKey": "64d36f124416c7f7eba787dce5a731677b4943e7ecd6aa6cd9b52173084067d9",
+    "previewModeEncryptionKey": "b85b609335fedf3ddfb2d0274b371cdd40c44767a39e2c2e5e6199b9fd28a377"
+  }
+}

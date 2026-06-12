@@ -1,6 +1,6 @@
 # API Reference — Global Cabs
 
-Base URL: `http://localhost:5000/api/v1`
+Base URL: `https://server.globalcabs.adsdigitalmedia.com/api/v1`
 
 - **Auth:** `Authorization: Bearer <token>` header (token also set as httpOnly cookie on login).
 - **Roles:** 🔓 public · 👤 customer (logged in) · 🛡 admin only.

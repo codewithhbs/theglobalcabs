@@ -32,16 +32,16 @@ cd backend
 cp .env.example .env        # fill MONGO_URI, JWT_SECRET (others optional for dev)
 npm install
 npm run seed                # demo data + admin user
-npm run dev                 # http://localhost:5000
+npm run dev                 # https://server.globalcabs.adsdigitalmedia.com
 
 # 2. Frontend
 cd ../frontend
 cp .env.local.example .env.local
 npm install
-npm run dev                 # http://localhost:3000
+npm run dev                 # https://globalcabs.adsdigitalmedia.com
 ```
 
-**Default admin:** `admin@theglobalcabs.com` / `admin123` → http://localhost:3000/admin
+**Default admin:** `admin@theglobalcabs.com` / `admin123` → https://globalcabs.adsdigitalmedia.com/admin
 
 Full setup (production, PM2, Cloudinary, SMS): see [`docs/INSTALLATION.md`](docs/INSTALLATION.md)
 API reference: see [`docs/API.md`](docs/API.md)
