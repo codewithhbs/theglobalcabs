@@ -32,7 +32,7 @@ cd backend
 cp .env.example .env        # fill MONGO_URI, JWT_SECRET (others optional for dev)
 npm install
 npm run seed                # demo data + admin user
-npm run dev                 # https://server.globalcabs.adsdigitalmedia.com
+npm run dev                 # http://localhost:9999
 
 # 2. Frontend
 cd ../frontend

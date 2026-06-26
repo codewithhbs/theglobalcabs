@@ -68,7 +68,7 @@ npm run dev      # nodemon
 npm start        # production
 ```
 
-Health check: `GET https://server.globalcabs.adsdigitalmedia.com/api/health`
+Health check: `GET http://localhost:9999/api/health`
 
 **Default admin:** `admin@theglobalcabs.com` / `admin123` — **change the password immediately in production** (Admin → Users, or via dashboard profile).
 
@@ -85,7 +85,7 @@ cp .env.local.example .env.local
 `.env.local`:
 
 ```env
-NEXT_PUBLIC_API_URL=https://server.globalcabs.adsdigitalmedia.com
+NEXT_PUBLIC_API_URL=http://localhost:9999
 NEXT_PUBLIC_SITE_URL=https://globalcabs.adsdigitalmedia.com
 ```
 

@@ -27,7 +27,7 @@ export default function AdminBookingsPage() {
       setBookings(b.data);
       setDrivers(d.data);
       setVehicles(v.data);
-    } catch {}
+    } catch { }
     setLoading(false);
   }, []);
 
@@ -105,7 +105,11 @@ export default function AdminBookingsPage() {
                   <p className="truncate text-xs">{b.pickupLocation} → {b.dropLocation}</p>
                   <p className="text-[11px] capitalize text-slate-400">{b.tripType} · {b.vehicle?.name || '—'}</p>
                 </td>
-                <td className="px-5 py-3.5 text-xs">{new Date(b.pickupDateTime).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}</td>
+                <td className="px-5 py-3.5 text-xs">
+                  {new Date(b.pickupDate).toLocaleString('en-IN', {
+                    day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
+                  })}
+                </td>
                 <td className="px-5 py-3.5 font-display font-extrabold text-amber-600">₹{b.fare?.total}</td>
                 <td className="px-5 py-3.5"><StatusBadge status={b.status} /></td>
                 <td className="px-5 py-3.5 text-right">
@@ -175,7 +179,7 @@ function ManageModal({ booking, drivers, vehicles, onClose, onSaved }) {
           <RouteLine from={booking.pickupLocation} to={booking.dropLocation} />
           <div className="mt-3 grid gap-1 text-xs text-slate-500">
             <p><b>Customer:</b> {booking.customerName || booking.customer?.name} · {booking.customerPhone || booking.customer?.phone} · {booking.customerEmail || booking.customer?.email}</p>
-            <p><b>Pickup:</b> {new Date(booking.pickupDateTime).toLocaleString('en-IN')}</p>
+            <p><b>Pickup:</b> {new Date(booking.pickupDate).toLocaleString('en-IN')}</p>
             <p className="capitalize"><b>Trip:</b> {booking.tripType} · {booking.distanceKm} km · {booking.passengers} pax</p>
             {booking.notes && <p><b>Customer notes:</b> {booking.notes}</p>}
           </div>

@@ -11,6 +11,7 @@ export default function BookingForm({ vehicles: vehiclesProp = [], routes: route
   const [step, setStep] = useState(1);
   const [vehicles, setVehicles] = useState(vehiclesProp);
   const [routes, setRoutes] = useState(routesProp);
+  const [guestAccount, setGuestAccount] = useState(null);
 
   useEffect(() => {
     if (vehiclesProp.length === 0) {
@@ -21,6 +22,8 @@ export default function BookingForm({ vehicles: vehiclesProp = [], routes: route
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log('BookingForm vehicles:', vehicles,routes);
   const [form, setForm] = useState({
     tripType: preselect.tripType || 'oneWay',
     routeId: preselect.routeId || '',
@@ -96,6 +99,8 @@ export default function BookingForm({ vehicles: vehiclesProp = [], routes: route
         },
       });
       setSuccess(res.data);
+      console.log("Booking confirmed, response:", res);
+      setGuestAccount(res.guestAccount || null);
     } catch (e) { setError(e.message); }
     setLoading(false);
   };
@@ -103,13 +108,41 @@ export default function BookingForm({ vehicles: vehiclesProp = [], routes: route
   if (success) {
     return (
       <div className="card p-8 text-center">
-        <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-green-100 text-green-600"><Icon name="check" className="h-7 w-7" /></span>
-        <h3 className="mt-4 font-display text-xl font-bold">Booking received!</h3>
-        <p className="mt-2 text-sm text-slate-500">
-          Booking ID <span className="font-bold text-ink">#{success.bookingId}</span>. Confirmation has been sent by SMS &amp; email. Our team will assign a driver shortly.
+    <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-green-100 text-green-600">
+      <Icon name="check" className="h-7 w-7" />
+    </span>
+    <h3 className="mt-4 font-display text-xl font-bold">Booking received!</h3>
+    <p className="mt-2 text-sm text-slate-500">
+      Booking ID <span className="font-bold text-ink">#{success.bookingId}</span>. Confirmation sent via SMS &amp; email.
+    </p>
+
+    {/* 👇 Guest account banner */}
+    {guestAccount?.created && (
+      <div className="mt-5 rounded-xl bg-amber-50 border border-amber-200 px-5 py-4 text-left">
+        <p className="text-sm font-semibold text-amber-800 mb-2">🎉 Account created for you!</p>
+        <div className="space-y-1 text-xs text-amber-700">
+          <p>📧 <span className="font-medium">Email:</span> {guestAccount.email}</p>
+          <p>🔑 <span className="font-medium">Password:</span> {guestAccount.password} <span className="text-amber-500">(your phone number)</span></p>
+        </div>
+        <p className="mt-3 text-xs text-amber-600">
+          Login and change your password to manage bookings anytime.
         </p>
-        <button onClick={() => { setSuccess(null); setStep(1); setFare(null); }} className="btn-ghost mt-6">Book another cab</button>
+        <a
+          href="/login"
+          className="mt-3 inline-block rounded-lg bg-amber-500 px-4 py-2 text-xs font-semibold text-white hover:bg-amber-600 transition"
+        >
+          Login to your account →
+        </a>
       </div>
+    )}
+
+    <button
+      onClick={() => { setSuccess(null); setStep(1); setFare(null); setGuestAccount(null); }}
+      className="btn-ghost mt-6"
+    >
+      Book another cab
+    </button>
+  </div>
     );
   }
 

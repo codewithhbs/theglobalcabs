@@ -42,6 +42,10 @@ app.use('/api/v1/dashboard', require('./routes/dashboard.routes'));
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok', uptime: process.uptime() }));
 
+app.use("/", (req, res) => {
+    res.send("Welcome to the API");
+});
+
 app.all('*', (req, res, next) => next(new AppError(`Route ${req.originalUrl} not found`, 404)));
 app.use(errorHandler);
 

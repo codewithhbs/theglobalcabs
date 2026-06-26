@@ -1,1 +1,5 @@
-{}
+{
+  "/page": "app/page.js",
+  "/routes/[slug]/page": "app/routes/[slug]/page.js",
+  "/[page]/page": "app/[page]/page.js"
+}

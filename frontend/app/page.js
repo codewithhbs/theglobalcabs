@@ -75,7 +75,7 @@ export default async function HomePage() {
             <Link href="/routes" className="btn-ghost">All routes →</Link>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {routes.map((r) => <RouteCard key={r._id} route={r} />)}
+            {routes && routes.map((r) => <RouteCard key={r._id} route={r} />)}
           </div>
         </div>
       </section>
@@ -128,13 +128,13 @@ export default async function HomePage() {
             <Link href="/fleet" className="btn-ghost">View fleet →</Link>
           </div>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {vehicles.slice(0, 4).map((v) => <VehicleCard key={v._id} vehicle={v} />)}
+            {vehicles && vehicles.slice(0, 4).map((v) => <VehicleCard key={v._id} vehicle={v} />)}
           </div>
         </div>
       </section>
 
       {/* TESTIMONIALS */}
-      {testimonials.length > 0 && (
+      {testimonials && testimonials.length > 0 && (
         <section className="bg-mist py-20">
           <div className="container-gc">
             <SectionHeading center eyebrow="Happy riders" title="What our customers say" />
@@ -146,7 +146,7 @@ export default async function HomePage() {
       )}
 
       {/* FAQ */}
-      {faqs.length > 0 && (
+      {faqs && faqs.length > 0 && (
         <section className="py-20">
           <div className="container-gc grid gap-12 lg:grid-cols-[1fr,1.4fr]">
             <div>

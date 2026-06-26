@@ -11,6 +11,7 @@ const { calculateFare } = require('../utils/fareEngine');
 const { sendEmail, bookingEmailBody } = require('../utils/sendEmail');
 const sendSms = require('../utils/sendSms');
 const generateInvoice = require('../utils/invoice');
+const User = require('../models/User');
 
 const notify = async (booking, subjectPrefix) => {
   const email = booking.customer?.email || booking.guestDetails?.email;
@@ -43,6 +44,39 @@ exports.createBooking = catchAsync(async (req, res, next) => {
     return next(new AppError('Guest bookings require name and phone', 400));
   }
 
+  // ─── Auto-create guest user ───────────────────────────────────────────────
+  let bookingCustomer = req.user || null;
+  let guestCredentials = null; // send to frontend
+
+  if (!req.user && guestDetails?.phone) {
+    let existingUser = await User.findOne({ phone: guestDetails.phone });
+
+    if (!existingUser) {
+      const rawPassword = guestDetails.phone; // default password = phone number
+      const tempEmail = guestDetails.email || `${guestDetails.phone}@guest.local`;
+
+      existingUser = await User.create({
+        name: guestDetails.name,
+        phone: guestDetails.phone,
+        email: tempEmail,
+        password: rawPassword,
+        role: 'customer',
+      });
+
+      guestCredentials = {
+        email: tempEmail,
+        password: rawPassword, // plain — sirf notify ke liye
+        isNewAccount: true,
+      };
+    } else {
+      // user pehle se hai, sirf booking link karo
+      guestCredentials = { isNewAccount: false };
+    }
+
+    bookingCustomer = existingUser;
+  }
+
+  // ─── Route & fare logic (unchanged) ──────────────────────────────────────
   let km = Number(distanceKm) || 0;
   let fareRule = null;
   let route = null;
@@ -57,13 +91,15 @@ exports.createBooking = catchAsync(async (req, res, next) => {
   let couponDoc = null;
   if (couponCode) {
     couponDoc = await Coupon.findOne({ code: couponCode.toUpperCase() });
-    if (couponDoc && couponDoc.isValidNow()) coupon = { type: couponDoc.type, value: couponDoc.value, code: couponDoc.code };
+    if (couponDoc && couponDoc.isValidNow())
+      coupon = { type: couponDoc.type, value: couponDoc.value, code: couponDoc.code };
   }
 
   const fare = await calculateFare({ fareRule, vehicle, distanceKm: km, date: pickupDate, time: pickupTime, tripType, coupon });
 
+  // ─── Create booking ───────────────────────────────────────────────────────
   const booking = await Booking.create({
-    customer: req.user?._id,
+    customer: bookingCustomer?._id,       // 👈 guest user ki id bhi save hogi
     guestDetails: req.user ? undefined : guestDetails,
     route: route?._id,
     vehicle: vehicle._id,
@@ -78,9 +114,34 @@ exports.createBooking = catchAsync(async (req, res, next) => {
 
   if (couponDoc && coupon) await Coupon.updateOne({ _id: couponDoc._id }, { $inc: { usedCount: 1 } });
 
+  // ─── Notify ───────────────────────────────────────────────────────────────
   const populated = await booking.populate('customer vehicle route');
   notify(populated, 'Booking Received');
-  res.status(201).json({ status: 'success', data: populated });
+
+  // New guest account notify
+  if (guestCredentials?.isNewAccount) {
+    const msg = `Welcome to The Global Cabs! Your account has been created.\nLogin: ${guestCredentials.email}\nPassword: ${guestCredentials.password}\nPlease change your password after login.`;
+    // SMS
+    // await sendSMS(guestDetails.phone, msg);
+    // Email (agar real email hai)
+    if (guestDetails.email) {
+      // await sendEmail({ to: guestDetails.email, subject: 'Your account details', text: msg });
+    }
+  }
+
+  res.status(201).json({
+    status: 'success',
+    data: populated,
+    // 👇 frontend ko bhejo
+    guestAccount: guestCredentials?.isNewAccount
+      ? {
+        created: true,
+        email: guestCredentials.email,
+        password: guestCredentials.password,
+        message: 'Your account has been created. Login with your phone number as password and please change it after login.',
+      }
+      : null,
+  });
 });
 
 // Customer: my bookings
