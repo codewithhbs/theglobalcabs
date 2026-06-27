@@ -50,6 +50,7 @@ app.use('/api/v1/vehicles', require('./routes/vehicle.routes'));
 app.use('/api/v1/drivers', require('./routes/driver.routes'));
 app.use('/api/v1/fares', require('./routes/fare.routes'));
 app.use('/api/v1/bookings', require('./routes/booking.routes'));
+app.use('/api/v1/tours', require('./routes/tour.routes'));
 app.use('/api/v1/blogs', require('./routes/blog.routes'));
 app.use('/api/v1/testimonials', require('./routes/testimonial.routes'));
 app.use('/api/v1/contact', require('./routes/contact.routes'));

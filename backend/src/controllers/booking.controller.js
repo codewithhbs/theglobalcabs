@@ -49,25 +49,43 @@ exports.createBooking = catchAsync(async (req, res, next) => {
   let guestCredentials = null; // send to frontend
 
   if (!req.user && guestDetails?.phone) {
-    let existingUser = await User.findOne({ phone: guestDetails.phone });
+    const tempEmail = (guestDetails.email || `${guestDetails.phone}@guest.local`).toLowerCase();
+
+    // A user is "existing" if EITHER their phone OR their email already matches.
+    // email is the unique-indexed field on User, so checking phone alone is not enough.
+    let existingUser = await User.findOne({
+      $or: [{ phone: guestDetails.phone }, { email: tempEmail }],
+    });
 
     if (!existingUser) {
       const rawPassword = guestDetails.phone; // default password = phone number
-      const tempEmail = guestDetails.email || `${guestDetails.phone}@guest.local`;
+      try {
+        existingUser = await User.create({
+          name: guestDetails.name,
+          phone: guestDetails.phone,
+          email: tempEmail,
+          password: rawPassword,
+          role: 'customer',
+        });
 
-      existingUser = await User.create({
-        name: guestDetails.name,
-        phone: guestDetails.phone,
-        email: tempEmail,
-        password: rawPassword,
-        role: 'customer',
-      });
-
-      guestCredentials = {
-        email: tempEmail,
-        password: rawPassword, // plain — sirf notify ke liye
-        isNewAccount: true,
-      };
+        guestCredentials = {
+          email: tempEmail,
+          password: rawPassword, // plain — sirf notify ke liye
+          isNewAccount: true,
+        };
+      } catch (err) {
+        // Race condition: a parallel request created the user between findOne and create.
+        // Mongo unique-index violation -> re-fetch and reuse instead of failing the booking.
+        if (err && err.code === 11000) {
+          existingUser = await User.findOne({
+            $or: [{ phone: guestDetails.phone }, { email: tempEmail }],
+          });
+          if (!existingUser) throw err;
+          guestCredentials = { isNewAccount: false };
+        } else {
+          throw err;
+        }
+      }
     } else {
       // user pehle se hai, sirf booking link karo
       guestCredentials = { isNewAccount: false };

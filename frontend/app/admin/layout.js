@@ -8,7 +8,9 @@ import { Icon } from '@/components/Icons';
 const NAV = [
   { href: '/admin', label: 'Dashboard', icon: 'car' },
   { href: '/admin/bookings', label: 'Bookings', icon: 'calendar' },
+  { href: '/admin/tour-bookings', label: 'Tour Bookings', icon: 'calendar' },
   { href: '/admin/routes', label: 'Routes', icon: 'pin' },
+  { href: '/admin/tours', label: 'Tours', icon: 'pin' },
   { href: '/admin/fares', label: 'Fares & Coupons', icon: 'rupee' },
   { href: '/admin/vehicles', label: 'Vehicles', icon: 'car' },
   { href: '/admin/drivers', label: 'Drivers', icon: 'users' },

@@ -25,7 +25,7 @@ export default function Footer({ settings }) {
         <div>
           <h3 className="font-display text-sm font-bold uppercase tracking-wider text-white">Quick Links</h3>
           <ul className="mt-4 space-y-2.5 text-sm">
-            {[['About Us', '/about'], ['Our Services', '/services'], ['Popular Routes', '/routes'], ['Our Fleet', '/fleet'], ['Fare Calculator', '/fare-calculator'], ['Blog', '/blog']].map(([t, h]) => (
+            {[['About Us', '/about'], ['Our Services', '/services'], ['Popular Routes', '/routes'], ['Holiday Tours', '/tours'], ['Our Fleet', '/fleet'], ['Fare Calculator', '/fare-calculator'], ['Blog', '/blog']].map(([t, h]) => (
               <li key={h}><Link href={h} className="hover:text-amber-400">{t}</Link></li>
             ))}
           </ul>

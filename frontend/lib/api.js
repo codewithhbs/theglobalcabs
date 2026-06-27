@@ -41,3 +41,6 @@ export const getBlog = (slug) => api(`/blogs/${slug}`).then((r) => r.data).catch
 export const getRouteDetail = (slug) => api(`/routes/detail/${slug}`, { revalidate: 120 }).then((r) => r.data).catch(() => null);
 export const getVehicle = (slug) => api(`/vehicles/${slug}`, { revalidate: 300 }).then((r) => r.data).catch(() => null);
 export const resolveSeo = (path) => api(`/seo/resolve?path=${encodeURIComponent(path)}`, { revalidate: 600 }).then((r) => r.data).catch(() => null);
+export const getTours = (qs = '') => api(`/tours?status=active&limit=100${qs}`, { revalidate: 120 }).then((r) => r.data).catch(() => []);
+export const getPopularTours = () => api('/tours?isPopular=true&status=active&limit=8', { revalidate: 120 }).then((r) => r.data).catch(() => []);
+export const getTour = (slug) => api(`/tours/${slug}`, { revalidate: 120 }).then((r) => r.data).catch(() => null);

@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import BookingForm from '@/components/BookingForm';
 import RouteCard from '@/components/RouteCard';
+import TourCard from '@/components/TourCard';
 import VehicleCard from '@/components/VehicleCard';
 import TestimonialCard from '@/components/TestimonialCard';
 import FaqAccordion from '@/components/FaqAccordion';
 import SectionHeading from '@/components/SectionHeading';
 import { Icon } from '@/components/Icons';
-import { getPopularRoutes, getVehicles, getTestimonials, getPage, getSettings } from '@/lib/api';
+import { getPopularRoutes, getVehicles, getTestimonials, getPage, getSettings, getPopularTours } from '@/lib/api';
 import { buildMetadata, faqSchema } from '@/lib/seo';
 import { SERVICES, WHY_US } from '@/lib/constants';
 
@@ -19,12 +20,13 @@ export async function generateMetadata() {
 }
 
 export default async function HomePage() {
-  const [routes, vehicles, testimonials, faqPage, settings] = await Promise.all([
+  const [routes, vehicles, testimonials, faqPage, settings, tours] = await Promise.all([
     getPopularRoutes(),
     getVehicles(),
     getTestimonials(),
     getPage('faq'),
     getSettings(),
+    getPopularTours(),
   ]);
   const faqs = faqPage?.faqs?.slice(0, 5) || [];
   const phone = settings?.phone || '+91 78273 13298';
@@ -132,6 +134,25 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* HOLIDAY TOURS — only shows if admin has added any popular tours */}
+      {tours && tours.length > 0 && (
+        <section className="bg-mist py-20">
+          <div className="container-gc">
+            <div className="flex flex-wrap items-end justify-between gap-6">
+              <SectionHeading
+                eyebrow="Holiday tours"
+                title="Curated trips. Pick your car."
+                subtitle="Multi-day tour packages with hand-picked itineraries — choose any car and the price updates instantly."
+              />
+              <Link href="/tours" className="btn-ghost">All tours →</Link>
+            </div>
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {tours.slice(0, 3).map((t) => <TourCard key={t._id} tour={t} />)}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* TESTIMONIALS */}
       {testimonials && testimonials.length > 0 && (

@@ -64,7 +64,7 @@ export default function BookingCard({ booking, onChanged }) {
       </div>
 
       <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs text-slate-500">
-        <span className="flex items-center gap-1.5"><Icon name="calendar" className="h-4 w-4" /> {fmtDateTime(booking.pickupDateTime)}</span>
+        <span className="flex items-center gap-1.5"><Icon name="calendar" className="h-4 w-4" /> {fmtDateTime(booking.pickupDate)}</span>
         <span className="flex items-center gap-1.5"><Icon name="car" className="h-4 w-4" /> {booking.vehicle?.name || 'Vehicle TBA'}</span>
         {booking.driver?.name && <span className="flex items-center gap-1.5"><Icon name="users" className="h-4 w-4" /> {booking.driver.name} · {booking.driver.phone}</span>}
         <span className="flex items-center gap-1.5 capitalize"><Icon name="flag" className="h-4 w-4" /> {booking.tripType}</span>
