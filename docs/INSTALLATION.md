@@ -50,7 +50,7 @@ FAST2SMS_API_KEY=
 # Company (used in emails/invoices)
 COMPANY_NAME=The Global Cabs
 COMPANY_PHONE=+91 7827313298
-COMPANY_EMAIL=theglobalcabs@gmail.com
+COMPANY_EMAIL=ishant.globalcabs@gmail.com
 COMPANY_ADDRESS=Gurugram, Haryana, India
 ```
 

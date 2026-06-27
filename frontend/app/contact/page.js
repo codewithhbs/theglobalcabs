@@ -14,7 +14,7 @@ export default async function ContactPage() {
   const settings = await getSettings();
   const phone = settings?.phone || '+91 78273 13298';
   const altPhone = settings?.altPhone || '+91 94162 73735';
-  const email = settings?.email || 'theglobalcabs@gmail.com';
+  const email = settings?.email || 'ishant.globalcabs@gmail.com';
   const address = settings?.address || 'Gurugram, Haryana, India';
 
   return (

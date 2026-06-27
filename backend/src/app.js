@@ -18,6 +18,7 @@ const allowedOrigins = [
     "https://theglobalcabs.in",
     "https://www.theglobalcabs.in",
     "http://localhost:3000",
+    "http://localhost:3015",
 ];
 
 app.use(

@@ -32,7 +32,7 @@ export const localBusinessSchema = (settings) => ({
   name: settings?.companyName || 'The Global Cabs',
   url: SITE,
   telephone: settings?.phone || '+91 7827313298',
-  email: settings?.email || 'theglobalcabs@gmail.com',
+  email: settings?.email || 'ishant.globalcabs@gmail.com',
   areaServed: ['Gurugram', 'Delhi NCR', 'North India'],
   address: { '@type': 'PostalAddress', addressLocality: 'Gurugram', addressRegion: 'Haryana', addressCountry: 'IN' },
   openingHours: 'Mo-Su 00:00-24:00',

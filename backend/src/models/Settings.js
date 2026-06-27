@@ -8,7 +8,7 @@ const settingsSchema = new mongoose.Schema(
     phone: { type: String, default: '+91 7827313298' },
     altPhone: String,
     whatsapp: { type: String, default: '+917827313298' },
-    email: { type: String, default: 'theglobalcabs@gmail.com' },
+    email: { type: String, default: 'ishant.globalcabs@gmail.com' },
     address: { type: String, default: 'Gurugram, Haryana, India' },
     workingHours: { type: String, default: '24x7 Available' },
     social: { facebook: String, instagram: String, twitter: String, linkedin: String, youtube: String },
