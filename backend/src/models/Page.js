@@ -10,13 +10,24 @@ const pageSchema = new mongoose.Schema(
     sections: [{ heading: String, body: String, image: { url: String, publicId: String } }],
     faqs: [{ question: String, answer: String }],
     status: { type: String, enum: ['active', 'inactive'], default: 'active' },
-    seo: { metaTitle: String, metaDescription: String, keywords: [String] },
+    seo: {
+      metaTitle: String,
+      metaDescription: String,
+      focusKeyword: String,
+      keywords: [String],
+      canonical: String,
+      noIndex: { type: Boolean, default: false },
+      ogTitle: String,
+      ogDescription: String,
+      ogImage: String, // image URL
+      schemaMarkup: String, // optional raw JSON-LD
+    },
   },
   { timestamps: true }
 );
 
 pageSchema.pre('validate', function (next) {
-  if (!this.slug) this.slug = slugify(this.title, { lower: true, strict: true });
+  this.slug = slugify(this.slug || this.title, { lower: true, strict: true });
   next();
 });
 

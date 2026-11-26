@@ -15,7 +15,7 @@ export default async function ContactPage() {
   const phone = settings?.phone || '+91 78273 13298';
   const altPhone = settings?.altPhone || '+91 94162 73735';
   const email = settings?.email || 'ishant.globalcabs@gmail.com';
-  const address = settings?.address || 'Gurugram, Haryana, India';
+  const address = settings?.address || 'H No 111, G. F, Shiva Enclave, Part - 1, Garhi Harsaru, Gurugram, Haryana 122505';
 
   return (
     <>
@@ -59,6 +59,18 @@ export default async function ContactPage() {
                 <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Office</p>
                 <p className="font-display font-bold">{address}</p>
               </div>
+            </div>
+            <div className="card overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3508.161079117343!2d76.921564!3d28.4445603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d175372af60db%3A0x2dab26ec8cf347b6!2sThe%20Global%20Cabs!5e0!3m2!1sen!2sin!4v1794471366083!5m2!1sen!2sin"
+                title="The Global Cabs location on Google Maps"
+                width="600"
+                height="450"
+                style={{ border: 0, width: '100%', height: '320px' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+              />
             </div>
           </div>
 

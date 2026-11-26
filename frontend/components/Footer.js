@@ -43,7 +43,7 @@ export default function Footer({ settings }) {
           <ul className="mt-4 space-y-3 text-sm">
             <li className="flex items-start gap-2"><Icon name="phone" className="mt-0.5 h-4 w-4 text-amber-400" /><a href={`tel:${s.phone || '+917827313298'}`} className="hover:text-amber-400">{s.phone || '+91 78273 13298'}</a></li>
             <li className="flex items-start gap-2"><Icon name="mail" className="mt-0.5 h-4 w-4 text-amber-400" /><a href={`mailto:${s.email || 'ishant.globalcabs@gmail.com'}`} className="hover:text-amber-400">{s.email || 'ishant.globalcabs@gmail.com'}</a></li>
-            <li className="flex items-start gap-2"><Icon name="pin" className="mt-0.5 h-4 w-4 text-amber-400" />{s.address || 'Gurugram, Haryana, India'}</li>
+            <li className="flex items-start gap-2"><Icon name="pin" className="mt-0.5 h-4 w-4 text-amber-400" />{s.address || 'H No 111, G. F, Shiva Enclave, Part - 1, Garhi Harsaru, Gurugram, Haryana 122505'}</li>
             <li className="flex items-start gap-2"><Icon name="clock" className="mt-0.5 h-4 w-4 text-amber-400" />{s.workingHours || '24x7 Available'}</li>
           </ul>
         </div>

@@ -1,4 +1,4 @@
-import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
+const Plus_Jakarta_Sans = () => ({ variable: 'x' }); const Inter = () => ({ variable: 'y' });
 import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import Navbar from '@/components/Navbar';

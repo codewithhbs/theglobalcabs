@@ -13,9 +13,9 @@ import { SERVICES, WHY_US } from '@/lib/constants';
 
 export async function generateMetadata() {
   return buildMetadata('/', {
-    title: 'Global Cabs — Taxi Service in Gurugram | Airport Transfer, Outstation & Local Rental',
+    title: 'Cabs in Gurgaon – 24x7 Booking | The Global Cabs',
     description:
-      'Book reliable cabs in Gurugram & Delhi NCR. Fixed fares for IGI Airport transfers, outstation trips to Jaipur, Agra, Chandigarh & local 8hr/80km rentals. 24x7 service, verified drivers.',
+      'Book reliable cabs in Gurgaon with The Global Cabs. Fixed-fare airport transfers, outstation & local rentals. 24x7 service with verified drivers. Call now!',
   });
 }
 

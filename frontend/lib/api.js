@@ -44,3 +44,6 @@ export const resolveSeo = (path) => api(`/seo/resolve?path=${encodeURIComponent(
 export const getTours = (qs = '') => api(`/tours?status=active&limit=100${qs}`, { revalidate: 120 }).then((r) => r.data).catch(() => []);
 export const getPopularTours = () => api('/tours?isPopular=true&status=active&limit=8', { revalidate: 120 }).then((r) => r.data).catch(() => []);
 export const getTour = (slug) => api(`/tours/${slug}`, { revalidate: 120 }).then((r) => r.data).catch(() => null);
+export const getPublicPage = (slug) => api(`/cms/pages/${slug}`, { revalidate: 60 }).then((r) => r.data).catch(() => null);
+export const getCmsPages = () => api('/cms/pages?status=active&limit=200', { revalidate: 300 }).then((r) => r.data).catch(() => []);
+
