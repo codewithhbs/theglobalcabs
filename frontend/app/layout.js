@@ -21,8 +21,10 @@ export const metadata = {
     'Book reliable cabs in Gurugram & Delhi NCR. Fixed-fare airport transfers, railway pickups, local rentals (8hr/80km) and one-way outstation taxis. 24x7 service, verified drivers.',
   keywords: ['taxi gurugram', 'cab booking gurgaon', 'airport transfer delhi', 'outstation cab', 'one way taxi'],
   openGraph: { siteName: 'The Global Cabs', type: 'website' },
+  verification: {
+    google: '662WYxeBJLh2rb92b6C210yJTxhJP4GiHNWURqy_M5Y',
+  },
 };
-
 export default async function RootLayout({ children }) {
   const settings = await getSettings();
   return (
